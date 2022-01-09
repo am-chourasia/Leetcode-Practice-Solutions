@@ -1,56 +1,51 @@
 class Solution {
-    struct Point{
-        int x, y;
-    };
     enum Direction{
         up, right, down, left
     };
-    void move(Direction& direction, Point& p){
-        int& x = p.x;
-        int& y = p.y;
-        if(direction == up)
-            y++;
-        else if(direction == right)
-            x++;
-        else if(direction == down)
-            y--;
-        else
-            x--;
+    void changeDirection(Direction& dir, Direction turn){
+        if(dir == left)
+            dir = turn == left ? down : up;
+        else if(dir == right)
+            dir = turn == left ? up : down;
+        else if(dir == up)
+            dir = turn == left ? left : right;
+        else 
+            dir = turn == left ? right : left;
     }
-    void changeDirection(Direction& direction, Direction turn){
-        if(direction == up)
-            direction = turn == left ? left : right;
-        else if(direction == right)
-            direction = turn == left ? up : down;
-        else if(direction == down)
-            direction = turn == left ? right : left; 
-        else
-            direction = turn == left ? down : up;
+    void move(Direction& dir, int& x, int& y){
+        if(dir == up)
+            y++;
+        else if(dir == down)
+            y--;
+        else if(dir == right)
+            x++;
+        else 
+            x--;
     }
 public:
     bool isRobotBounded(string instructions) {
+        int x = 0, y = 0;
         Direction direction = up;
-        Point position;
-        position.x = position.y = 0;
-        // traversing 4 times:
-        
-        for(int traversal = 1; traversal <= 4; traversal++){
-            for(char instruction: instructions){
-                switch(instruction){
-                    case 'G':
-                        move(direction, position);
-                        break;
-                    case 'L':
-                        changeDirection(direction, left);
-                        break;
-                    case 'R':
-                        changeDirection(direction, right);
-                        break;
-                }
+        for(char instruction: instructions){
+            switch(instruction){
+                case 'G':
+                    move(direction, x, y);
+                    break;
+                case 'L':
+                    changeDirection(direction, left);
+                    break;
+                case 'R':
+                    changeDirection(direction, right);
+                    break;
             }
+            cout << x << " " << y << "\t" << direction << endl;
         }
-        if(position.x == 0 && position.y == 0)
+        if(x == 0 and y == 0)
             return true;
+        // if the resultant vector is not in the north direction,
+        // the robot always stays in a loop
+        if(direction != up) 
+            return true; 
         return false;
     }
 };
