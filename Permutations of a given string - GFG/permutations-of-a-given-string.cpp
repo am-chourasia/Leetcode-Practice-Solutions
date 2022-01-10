@@ -5,6 +5,22 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
+    bool n(string& s){
+        int n = s.length();
+        if(n == 1)
+            return false;
+        int left = n-2;
+        while(left >= 0 && s[left] >= s[left + 1])
+            left--;
+        if(left == -1)
+            return false;
+        int right = n-1;
+        while(s[right] <= s[left])
+            right--;
+        swap(s[right], s[left]);
+        reverse(s.begin() + left + 1, s.end());
+        return true;
+    }
 	public:
 	vector<string>find_permutation(string S)
 	{
@@ -12,7 +28,7 @@ class Solution
 	    vector<string> ans;
 	    do{
 	        ans.push_back(S);
-	    } while(next_permutation(S.begin(), S.end()));
+	    }while(next_permutation(S));
 	    return ans;
 	}
 };
