@@ -9,15 +9,6 @@ class Solution {
             u = (u*x)%m;
         return u;
     }
-    // int modpow(int x, int n){
-    //     if(n == 1)
-    //         return x;
-    //     int k = modpow(x, n/2);
-    //     k = (k * k) % mod;
-    //     if(n % 2 == 1)
-    //         k = (k * x) % mod;
-    //     return k;
-    // }
 public:
     int numSubseq(vector<int>& nums, int target) {
         sort(nums.begin(), nums.end());
@@ -30,6 +21,8 @@ public:
                 mid--;
                 ans = (ans + modpow(2, mid - i, mod)) % mod;
             }
+            else
+                break;
         }
         return ans;
     }
