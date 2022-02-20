@@ -7,7 +7,7 @@ class Solution {
         
         for(int i = 3; i*i < n; i += 2){
             if(isPrime[i] == true)
-                for(int j = 2; j * i < n; j++)
+                for(int j = i; j * i < n; j++)
                     isPrime[i * j] = false;
         }
         
