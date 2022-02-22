@@ -20,9 +20,7 @@ public:
             pq.push(nums[i]);
             if(pq.size() > k)
                 pq.pop();
-            cout << pq.top() << " ";
         }
-        cout << endl;
         return pq.top();
     }
 };
