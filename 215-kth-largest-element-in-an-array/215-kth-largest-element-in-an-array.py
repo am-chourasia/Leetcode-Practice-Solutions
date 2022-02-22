@@ -6,8 +6,6 @@ class Solution:
             while l <= r:
                 if nums[l] < pivot and nums[r] > pivot:
                     nums[r], nums[l] = nums[l], nums[r]
-                    r -= 1
-                    l += 1
                 if nums[l] >= pivot:
                     l += 1
                 if nums[r] <= pivot:
