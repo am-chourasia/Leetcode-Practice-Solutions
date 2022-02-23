@@ -25,10 +25,9 @@ class Solution {
         map.put(root.val, current);
         Node neighbour = null;
         for(Node node : root.neighbors){
-            if(map.containsKey(node.val))
-                neighbour = map.get(node.val);
-            else
-                neighbour = traverseAndClone(node);
+            if(!map.containsKey(node.val))
+                traverseAndClone(node);
+            neighbour = map.get(node.val);
             current.neighbors.add(neighbour);
         }
         return current;
