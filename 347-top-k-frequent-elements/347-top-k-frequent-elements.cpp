@@ -10,7 +10,7 @@ public:
         for(auto m : freq)
             vi.push_back(m);
         
-        sort(vi.begin(), vi.end(), [](const pair<int, int>& a, const pair<int, int>& b){
+        partial_sort(vi.begin(), vi.begin() + k,vi.end(), [](const pair<int, int>& a, const pair<int, int>& b){
             return a.second > b.second;
         });
         
