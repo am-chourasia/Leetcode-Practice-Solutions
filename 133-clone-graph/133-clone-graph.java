@@ -20,7 +20,7 @@ class Node {
 
 class Solution {
     Map<Integer, Node> map; 
-    Node traverseAndClone(Node root){
+    void traverseAndClone(Node root){
         Node current = new Node(root.val);
         map.put(root.val, current);
         Node neighbour = null;
@@ -30,12 +30,12 @@ class Solution {
             neighbour = map.get(node.val);
             current.neighbors.add(neighbour);
         }
-        return current;
     }
     public Node cloneGraph(Node node) {
         if(node == null)
             return null;
         map = new HashMap<Integer, Node>();
-        return traverseAndClone(node);
+        traverseAndClone(node);
+        return map.get(node.val);
     }
 }
