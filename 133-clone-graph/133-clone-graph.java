@@ -23,7 +23,7 @@ class Solution {
     Node traverseAndClone(Node root){
         Node current = new Node(root.val);
         map.put(root.val, current);
-        Node neighbour;
+        Node neighbour = null;
         for(Node node : root.neighbors){
             if(map.containsKey(node.val))
                 neighbour = map.get(node.val);
