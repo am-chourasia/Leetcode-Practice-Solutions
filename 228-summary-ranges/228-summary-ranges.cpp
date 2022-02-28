@@ -6,6 +6,7 @@ public:
         if(n == 0)
             return ans;
         
+        ans.reserve(n);
         ans.push_back(to_string(nums[0]));
         
         for(int i = 1; i < n; i++){
