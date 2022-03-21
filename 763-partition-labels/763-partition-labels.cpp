@@ -10,6 +10,7 @@ public:
         }
         
         vector<int> ans;
+        ans.reserve(len / 2);
         
         for(int i = 0; i < len; i++){
             int start = i;
