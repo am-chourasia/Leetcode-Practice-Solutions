@@ -6,9 +6,7 @@ public:
         vector<pair<int, int>> strength(height);
         
         for(int row = 0; row < height; row++){
-            int count = 0;
-            for(int col = 0; col < width; col++)
-                count += mat[row][col];
+            int count = lower_bound(mat[row].begin(), mat[row].end(), 0, greater<int>()) - mat[row].begin();
             strength[row] = {count, row};
         }
         
