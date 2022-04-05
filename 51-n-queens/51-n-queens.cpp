@@ -8,30 +8,19 @@ public:
         solve(0, board);
         return ans;
     }
-    bool check(vector<string>& board, int i, int j){
-        for(int k = 0; k < N; k++)
-            if(board[i][k] == 'Q' or board[k][j] == 'Q')
+    bool check(vector<string>& board, int row, int col){
+        // upwards
+        for(int i = row - 1; i >= 0; i--)
+            if(board[i][col] == 'Q')
                 return false;
-        int k = i - 1;
-        int r = 1;
-        while(k >= 0){
-            if(j + r < N and board[k][j + r] == 'Q')
+        // upper left
+        for(int i = row - 1, j = col - 1; i >= 0 and j >= 0; i--, j--)
+            if(board[i][j] == 'Q')
                 return false;
-            if(j - r >= 0 and board[k][j - r] == 'Q')
+        // upper right
+        for(int i = row - 1, j = col + 1; i >= 0 and j < N; i--, j++)
+            if(board[i][j] == 'Q')
                 return false;
-            r++;
-            k--;
-        }
-        k = i + 1;
-        r = 1;
-        while(k < N){
-            if(j + r < N and board[k][j + r] == 'Q')
-                return false;
-            if(j - r >= 0 and board[k][j - r] == 'Q')
-                return false;
-            k++;
-            r++;
-        }
         return true;
     }
     void solve(int i, vector<string>& board){
