@@ -10,9 +10,11 @@ public:
         for(auto m : freq)
             vi.push_back(m);
         
-        partial_sort(vi.begin(), vi.begin() + k,vi.end(), [](const pair<int, int>& a, const pair<int, int>& b){
+        auto comparator = [](const pair<int, int>& a, const pair<int, int>& b){
             return a.second > b.second;
-        });
+        };
+        
+        partial_sort(vi.begin(), vi.begin() + k, vi.end(), comparator);
         
         vector<int> ans(k);
         for(int i = 0; i < k; i++)
