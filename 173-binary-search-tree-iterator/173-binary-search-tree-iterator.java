@@ -55,7 +55,7 @@ class BSTIterator {
     }
     
     public boolean hasNext() {
-        if(current == null || current.right == deepRoot)
+        if(current.right == deepRoot)
             return false;
         return true;
     }
