@@ -12,14 +12,8 @@ public:
         return ans;
     }
     void recurse(vector<int>& nums, vector<int>& permutation, int idx){
-        if(idx == 1){ // only two elements remain
-            permutation.push_back(nums[1]);
-            permutation.push_back(nums[0]);
+        if(idx < 0){
             ans.push_back(permutation);
-            swap(permutation[n - 1], permutation[n - 2]);
-            ans.push_back(permutation);
-            permutation.pop_back();
-            permutation.pop_back();
             return;
         }
         
