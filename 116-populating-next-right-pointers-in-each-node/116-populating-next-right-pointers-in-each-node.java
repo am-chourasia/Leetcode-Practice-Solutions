@@ -23,19 +23,19 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        if(root == null)
-            return root;
-        if(root.left == null)
-            return root;
-        
-        // connecting children:
-        root.left.next = root.right;
-        //connecting next level:
-        if(root.next != null)
-            root.right.next = root.next.left;
-        
-        connect(root.left);
-        connect(root.right);
+        Node start = root;
+        while(start != null){
+            Node node = start;
+            while(node != null){
+                if(node.left != null){
+                    node.left.next = node.right;
+                    if(node.next != null)
+                        node.right.next = node.next.left;
+                }
+                node = node.next;
+            }
+            start = start.left;
+        }
         return root;
     }
 }
