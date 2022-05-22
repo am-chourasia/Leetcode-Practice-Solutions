@@ -17,15 +17,10 @@ public:
                     if(s[i] == s[j] and isPalindrome[i + 1][j - 1])
                         isPalindrome[i][j] = true;
                 }
+                if(isPalindrome[i][j])
+                    count++;
                 j++;
                 i++;
-            }
-        }
-        
-        for(int start = 0; start < n; start++){
-            for(int end = start; end < n; end++){
-                if(isPalindrome[start][end])
-                    count++;
             }
         }
         
