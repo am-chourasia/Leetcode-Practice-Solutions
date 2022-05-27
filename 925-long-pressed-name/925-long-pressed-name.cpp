@@ -7,29 +7,19 @@ public:
         if(length2 < length1)
             return false;
         
-        int p = 0; // pointer to the name string;
-        int pointer2 = 0; // pointer to the typed string
+        int pointer1 = 0;
         
-        while(pointer2 < length2){
-            int count = 1;
-            char c = name[p];
-            while(p + 1 < length1 and c == name[p + 1]){
-                count++;
-                p++;
-            }
-            
-            while(pointer2 < length2 and typed[pointer2] == c){
-                count--;
-                pointer2++;
-            }
-            
-            if(count > 0)
+        for(int pointer2 = 0; pointer2 < length2; pointer2 ++){
+            if(pointer1 == length1 and typed[pointer2] != name[pointer1 - 1])
                 return false;
-            p++;
+            else if(name[pointer1] == typed[pointer2])
+                pointer1++;
+            else if(pointer1 == 0 or name[pointer1 - 1] != typed[pointer2])
+                return false;
         }
-        if(p < length1)
-            return false;
         
+        if(pointer1 < length1)
+            return false;
         return true;
     }
 };
