@@ -7,34 +7,20 @@
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
         
-        n, m = 0, 0
+        if not headA or not headB:
+            return None
         
-        node = headA
-        while node is not None:
-            n += 1
-            node = node.next
-        
-        node = headB
-        while node is not None:
-            m += 1
-            node = node.next
-            
-        if n < m:
-            headA, headB = headB, headA
-            n, m = m, n
-        
-        extra = n - m
         nodeA = headA
         nodeB = headB
         
-        while extra > 0:
-            nodeA = nodeA.next
-            extra -= 1
+        while nodeA is not nodeB:
+            if nodeA is None:
+                nodeA = headB
+            else:
+                nodeA = nodeA.next
+            if nodeB is None:
+                nodeB = headA
+            else:
+                nodeB = nodeB.next
         
-        while nodeA and nodeB:
-            if nodeA is nodeB:
-                return nodeA
-            nodeA = nodeA.next
-            nodeB = nodeB.next
-        
-        return None
+        return nodeA
