@@ -5,7 +5,8 @@ public:
         if(len < k)
             return false;
         
-        unordered_set<int> present;
+        vector<bool> present(1 << k, false);
+        int count = 0;
         int start = 0, end = k;
         int number = 0;
         int mul = 1 << (k - 1);
@@ -17,7 +18,8 @@ public:
             start++;
         }
         
-        present.insert(number);
+        present[number] = true;
+        count++;
         start = 0, end = k, mul = 1 << (k - 1);
         
         while(end < len){
@@ -26,11 +28,12 @@ public:
             number -= digRemoved * mul;
             number <<= 1;
             number += digAdded;
-            present.insert(number);
+            if(not present[number])
+                present[number] = true, count++;
             start++, end++;
         }
         
-        bool hasAll = present.size() == (1 << k);
+        bool hasAll = count == (1 << k);
         return hasAll;
     }
 };
