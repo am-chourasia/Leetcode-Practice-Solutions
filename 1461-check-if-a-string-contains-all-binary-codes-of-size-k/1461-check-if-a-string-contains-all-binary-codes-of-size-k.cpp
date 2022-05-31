@@ -6,34 +6,30 @@ public:
             return false;
         
         vector<bool> present(1 << k, false);
-        int count = 0;
+        int need = 1 << k;
+        int oneHash = need - 1;
         int start = 0, end = k;
         int number = 0;
-        int mul = 1 << (k - 1);
         
         while(start < end){
             int digit = s[start] - '0';
-            number = number + mul * digit;
-            mul >>= 1;
+            number  = ((number << 1) & oneHash) | digit;
             start++;
         }
         
         present[number] = true;
-        count++;
-        start = 0, end = k, mul = 1 << (k - 1);
+        need--;
+        start = 0;
         
         while(end < len){
-            int digRemoved = s[start] - '0';
-            int digAdded = s[end] - '0';
-            number -= digRemoved * mul;
-            number <<= 1;
-            number += digAdded;
+            int digit = s[end] - '0';
+            number  = ((number << 1) & oneHash) | digit;
             if(not present[number])
-                present[number] = true, count++;
+                present[number] = true, need--;
             start++, end++;
         }
         
-        bool hasAll = count == (1 << k);
+        bool hasAll = need == 0;
         return hasAll;
     }
 };
