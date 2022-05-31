@@ -8,25 +8,13 @@ public:
         vector<bool> present(1 << k, false);
         int need = 1 << k;
         int oneHash = need - 1;
-        int start = 0, end = k;
         int number = 0;
         
-        while(start < end){
-            int digit = s[start] - '0';
-            number  = ((number << 1) & oneHash) | digit;
-            start++;
-        }
-        
-        present[number] = true;
-        need--;
-        start = 0;
-        
-        while(end < len){
+        for(int end = 0; end < len; end++){
             int digit = s[end] - '0';
             number  = ((number << 1) & oneHash) | digit;
-            if(not present[number])
+            if(end >= k - 1 and not present[number])
                 present[number] = true, need--;
-            start++, end++;
         }
         
         bool hasAll = need == 0;
