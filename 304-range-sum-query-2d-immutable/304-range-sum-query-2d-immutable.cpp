@@ -20,16 +20,16 @@ public:
         }
     }
     
-    int sumRegion(int p, int q, int a, int b) {
-        int sum = mat[a][b];
-        p--, q--;
-        cout << a << " " << b << " " << p << " " << q << endl;
-        if(p!=-1 and q!=-1)
-            sum = sum + mat[p][q] - mat[p][b] - mat[a][q];
-        else if(p != -1)
-            sum = sum - mat[p][b];
-        else if(q != -1)
-            sum = sum - mat[a][q];
+    int sumRegion(int row1, int col1, int row2, int col2) {
+        int sum = mat[row2][col2];
+        row1--, col1--;
+        
+        if(row1!=-1 and col1!=-1)
+            sum = sum + mat[row1][col1] - mat[row1][col2] - mat[row2][col1];
+        else if(row1 != -1)
+            sum = sum - mat[row1][col2];
+        else if(col1 != -1)
+            sum = sum - mat[row2][col1];
         return sum;
     }
 };
