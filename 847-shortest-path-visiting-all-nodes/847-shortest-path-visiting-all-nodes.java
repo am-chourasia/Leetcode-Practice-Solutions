@@ -34,6 +34,7 @@ class Solution {
             }
             level += 1;
         }
+        
         return level;
     }
 }
