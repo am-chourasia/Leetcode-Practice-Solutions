@@ -17,14 +17,6 @@ public:
         if(grid[0][0] == 1)
             return -1;
         
-        vector<vector<bool>> visited(n, vector<bool>(n, false));
-        
-        const vector<Point> dir = {
-            {-1, -1}, {-1, 0}, {-1, 1},
-            { 0, -1}, { 0, 0}, { 0, 1},
-            { 1, -1}, { 1, 0}, { 1, 1}
-        };
-        
         std::queue<Point> queue;
         queue.push({0, 0});
         int distance = 0;
@@ -33,20 +25,18 @@ public:
             int level = queue.size();
             distance++;
             while(level--){
-                Point point = queue.front(); 
-                queue.pop();
+                Point point = queue.front(); queue.pop();
+                
                 if(point.i == n-1 and point.j == n-1)
                     return distance;
                 
-                for(auto [i, j] : dir){
-                    int newI = point.i + i;
-                    int newJ = point.j + j;
-                    if(isValid(newI, newJ) 
-                       and grid[newI][newJ] == 0 
-                       and not visited[newI][newJ]
-                      ){
-                        queue.push({newI, newJ});
-                        visited[newI][newJ] = true;
+                for(int i = -1; i <= 1; i++){
+                    for(int j = -1; j <= 1; j++){
+                        int x = point.i + i, y = point.j + j;
+                        if(isValid(x, y) and grid[x][y] == 0){
+                            grid[x][y] = 1;
+                            queue.push({x, y});
+                        }
                     }
                 }
             }            
