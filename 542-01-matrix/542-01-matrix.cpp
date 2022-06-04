@@ -10,12 +10,10 @@ public:
             for(int j = 0; j < m; j++){
                 if(mat[i][j] == 0)
                     grid[i][j] = 0;
-                else{
-                    if(i > 0)
-                        grid[i][j] = min(grid[i][j], grid[i - 1][j] + 1);
-                    if(j > 0)
-                        grid[i][j] = min(grid[i][j], grid[i][j - 1] + 1);
-                }
+                if(i > 0)
+                    grid[i][j] = min(grid[i][j], grid[i - 1][j] + 1);
+                if(j > 0)
+                    grid[i][j] = min(grid[i][j], grid[i][j - 1] + 1);
             }
         }
         
