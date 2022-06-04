@@ -1,13 +1,6 @@
 class Solution {
     vector<vector<string>> ans;
     int N;
-public:
-    vector<vector<string>> solveNQueens(int n) {
-        vector<string> board(n, string(n, '.'));
-        N = n;
-        solve(0, board);
-        return ans;
-    }
     bool check(vector<string>& board, int row, int col){
         // upwards
         for(int i = row - 1; i >= 0; i--)
@@ -35,5 +28,12 @@ public:
                 board[i][j] = '.';
             }
         }
+    }
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> board(n, string(n, '.'));
+        N = n;
+        solve(0, board);
+        return ans;
     }
 };
