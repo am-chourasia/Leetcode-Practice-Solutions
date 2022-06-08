@@ -3,7 +3,7 @@ class Solution:
         
         n = len(graph)
         color = [0 for i in range(n)]
-        WHITE, GREY, BLACK = 0, -1, 1
+        WHITE, GREY, BLACK = 0, 1, 2
         
         def isCyclic(node):
             color[node] = GREY # mark as grey
@@ -28,4 +28,3 @@ class Solution:
                 ans.append(i)
         
         return ans
-            
