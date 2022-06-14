@@ -4,8 +4,6 @@ class Solution {
         final int len2 = word2.length();
         
         int[][] dp = new int[len1 + 1][len2 + 1];
-        for(int i = 0; i < len1 + 1; i++)
-            dp[i] = new int[len2 + 1];
         
         for(int i = 1; i <= len1; i++){
             for(int j = 1; j <= len2; j++){
