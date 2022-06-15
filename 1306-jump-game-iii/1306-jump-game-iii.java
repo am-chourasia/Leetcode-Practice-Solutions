@@ -1,17 +1,14 @@
 class Solution {
     private boolean traversePath(int[] arr, int index, boolean[] visited){
+        if(index < 0 || index >= arr.length || visited[index])
+            return false;
         if(arr[index] == 0)
             return true;
         visited[index] = true;
         int prevIndex = index - arr[index];
         int nextIndex = index + arr[index];
-        if(prevIndex >= 0 && !visited[prevIndex])
-            if(traversePath(arr, prevIndex, visited))
-                return true;
-        if(nextIndex < arr.length && !visited[nextIndex])
-            if(traversePath(arr, nextIndex, visited))
-                return true;
-        return false;
+        return traversePath(arr, prevIndex, visited) 
+            || traversePath(arr, nextIndex, visited);
     }
     public boolean canReach(int[] arr, int start) {
         int len = arr.length;
