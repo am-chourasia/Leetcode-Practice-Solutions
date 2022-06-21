@@ -1,39 +1,39 @@
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        Map<String, Boolean> map = new HashMap<>();
+        var set = new HashSet<String>();
         for(int i = 0; i < wordList.size(); i++)
-            map.put(wordList.get(i), false);
-        
-        if(!map.containsKey(endWord)) 
+            set.add(wordList.get(i));
+        set.remove(beginWord);
+        if(!set.contains(endWord)) 
             return 0;
         
         Queue<String> queue = new LinkedList<>();
         queue.add(beginWord);
-        
         int changes = 1;
         
         while(!queue.isEmpty()){
             int size = queue.size();
-            for(int i = 0; i < size; i++){
+            for(int __ = 0; __ < size; __++){
                 String word = queue.poll();
-                if(word.equals(endWord)) 
+                if(word.equals(endWord))
                     return changes;
-
+                var str = new StringBuilder(word);
                 for(int j = 0; j < word.length(); j++){
+                    char original = word.charAt(j);
                     for(char k = 'a'; k <= 'z'; k++){
-                        char arr[] = word.toCharArray();
-                        arr[j] = k;
-
-                        String str = new String(arr);
-                        if(map.containsKey(str) && !map.get(str)){
-                            queue.add(str);
-                            map.put(str, true);
+                        str.setCharAt(j, k);
+                        String converted = str.toString();
+                        if(set.contains(converted)){
+                            queue.add(converted);
+                            set.remove(converted);
                         }
                     }
-                }   
+                    str.setCharAt(j, original);
+                }
             }
             ++changes;
         }
+        
         return 0;
     }
 }
