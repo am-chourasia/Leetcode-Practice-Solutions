@@ -8,7 +8,7 @@ public:
             return a[0] < b[0];
         });
         
-        priority_queue<int> pq; // duration, index
+        priority_queue<int> pq; 
         int count = 0, time = 0;
         
         for(int i = 0; i < len; i++){
