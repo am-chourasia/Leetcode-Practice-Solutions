@@ -3,6 +3,7 @@
  * @return {number[]}
  */
 var runningSum = function(nums) {
-    nums.reduce((accumulator, currentValue, index, array) => array[index] += accumulator);
-    return nums;
+    let ret = []
+    nums.reduce((accumulator, currentValue, index, arr) => ret[index] = arr[index] + accumulator, 0);
+    return ret;
 };
