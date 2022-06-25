@@ -1,33 +1,18 @@
 class Solution {
     public boolean checkPossibility(int[] nums) {
         int len = nums.length;
-        if(len <= 2)
-            return true;
+        boolean changed = false;
         
-        boolean modified = false;
-        int prev = Integer.MIN_VALUE;
-        int i = 0;
-    
-        while (i < len - 1) {
-            int current = nums[i];
-            int next = nums[i + 1];
-            if(current >= prev && current > next){ // a peak is there.
-                if(modified)
-                    return false;                 // if the array has already been modified
-                modified = true;
-                if (prev <= next) {
-                    // just ignore the current index;
-                } else if (i + 2 == len || nums[i + 2] >= current) {
-                    prev = current;
-                    i = i + 1;
-                } else {
+        for(int i = 1; i < len; i++){
+            if(nums[i - 1] > nums[i]){
+                if(changed)
                     return false;
-                }
+                if(i - 2 < 0 || nums[i - 2] <= nums[i])
+                    nums[i - 1] = nums[i];
+                else
+                    nums[i] = nums[i - 1];
+                changed = true;
             }
-            else {
-                prev = current;
-            }
-            i = i + 1;
         }
         
         return true;
