@@ -26,7 +26,8 @@ class Solution:
                 if grid[i][j] is 1:
                     addInitials(i, j)
                     break
-            else:   continue
+            else:   
+                continue
             break
         
         distance = 0
