@@ -14,14 +14,11 @@ public:
         while(not maxHeap.empty()){
             int count = maxHeap.top();
             maxHeap.pop();
-            if(allowed == 0){
-                deleteCount += count;
-            } else if (count > allowed) {
+            if (count > allowed) {
                 deleteCount += count - allowed;
-                allowed--;
-            } else {
-                allowed = count - 1;
+                count = allowed;   
             }
+            allowed = max(0, count - 1);
         }
         
         return deleteCount;
