@@ -1,36 +1,30 @@
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
-        int n = heights.size();
-        std::stack<int> stack;              // will store the index
-        std::vector<int> dist(n);
+        int len = heights.size();
+        std::stack<int> stack;
+        int maxArea = 0;
         
-        for(int i=0; i<n; i++){
-            while(!stack.empty() and heights[i] < heights[stack.top()]){
-                dist[stack.top()] = i - stack.top();
+        for(int i = 0; i < len; i++){
+            while(not stack.empty() and heights[stack.top()] > heights[i]){
+                int idx = stack.top();
                 stack.pop();
+                int left_smaller = stack.empty() ? -1 : stack.top();
+                int right_smaller = i;
+                int area = heights[idx] * (right_smaller - left_smaller - 1);
+                maxArea = max(area, maxArea);
             }
             stack.push(i);
         }
-        while(!stack.empty()){
-            dist[stack.top()] = n - stack.top();
+        while(not stack.empty()){
+            int idx = stack.top();
             stack.pop();
+            int left_smaller = stack.empty() ? -1 : stack.top();
+            int right_smaller = len;
+            int area = heights[idx] * (right_smaller - left_smaller - 1);
+            maxArea = max(area, maxArea);
         }
         
-        for(int i=n-1; i>=0; i--){
-            while(!stack.empty() and heights[i] < heights[stack.top()]){
-                dist[stack.top()] += stack.top() - i - 1;
-                stack.pop();
-            }
-            stack.push(i);
-        }
-        while(!stack.empty()){
-            dist[stack.top()] += stack.top();
-            stack.pop();
-        }
-        int ans = 0;
-        for(int i=0; i<n; i++)
-            ans = max(ans, dist[i] * heights[i]);
-        return ans;
+        return maxArea;
     }
 };
