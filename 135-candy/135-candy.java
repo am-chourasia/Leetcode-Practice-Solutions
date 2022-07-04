@@ -14,7 +14,9 @@ class Solution {
                 cache[i] = cache[i + 1] + 1;
         }
         
-        int minCandy = IntStream.of(cache).sum();
+        int minCandy = 0;
+        for(int i = 0; i < len; i++)
+            minCandy += cache[i];
         return minCandy;
     }
 }
