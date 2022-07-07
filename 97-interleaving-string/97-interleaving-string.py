@@ -5,26 +5,22 @@ class Solution:
             return False
         
         dp = [[None for j in range(len2 + 1)] for i in range(len1 + 1)]
+        dp[len1][len2] = True
         
-        def isPossible(i, j, k):
-            if dp[i][j] is not None:
-                return dp[i][j]
-            
-            if k is len3:
-                dp[i][j] = True
-                return True
-            
-            if i < len1 and s[k] is s1[i]:
-                if isPossible(i + 1, j, k + 1):
-                    dp[i][j] = True
-                    return True
-                
-            if j < len2 and s[k] is s2[j]:
-                if isPossible(i, j + 1, k + 1):
-                    dp[i][j] = True
-                    return True
-            
-            dp[i][j] = False
-            return False
+        k = len3 - 1
+        for i in range(len1 - 1, -1, -1):
+            dp[i][len2] = dp[i + 1][len2] and s[k] is s1[i]
+            k -= 1
         
-        return isPossible(0, 0, 0)
+        k = len3 - 1
+        for j in range(len2 - 1, -1, -1):
+            dp[len1][j] = dp[len1][j + 1] and s[k] is s2[j]
+            k -= 1
+        
+        for i in range(len1 - 1, -1, -1):
+            for j in range(len2 - 1, -1, -1):
+                k = i + j
+                dp[i][j] = s[k] is s1[i] and dp[i + 1][j] or \
+                           s[k] is s2[j] and dp[i][j + 1]
+            
+        return dp[0][0]
