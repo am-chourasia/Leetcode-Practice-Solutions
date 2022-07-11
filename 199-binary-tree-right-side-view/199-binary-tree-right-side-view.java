@@ -19,8 +19,9 @@ class Solution {
             return;
         int size = rightView.size();
         if(level >= size)
-            rightView.add(level);
-        rightView.set(level, node.val);
+            rightView.add(node.val);
+        else
+            rightView.set(level, node.val);
         dfs(node.left, level + 1, rightView);
         dfs(node.right, level + 1, rightView);
     }
