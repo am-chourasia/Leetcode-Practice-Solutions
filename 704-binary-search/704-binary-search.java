@@ -1,18 +1,18 @@
-class Solution {
-    public int search(int[] nums, int target) {
-        int len = nums.length;
-        int start = 0, end = len;
-        
-        while(start < end){
-            int mid = (start + end) / 2;
-            if(nums[mid] == target)
-                return mid;
-            if(nums[mid] < target)
-                start = mid + 1;
-            else
-                end = mid;
-        }
-        
-        return -1;
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+    let left = 0, right = nums.length;
+    while(left + 1 < right){
+        let mid = Math.floor((left + right) / 2);
+        if(nums[mid] == target)
+            return mid;
+        if(nums[mid] < target)
+            left = mid + 1;
+        else
+            right = mid;
     }
-}
+    return nums[left] === target ? left : -1;
+};
