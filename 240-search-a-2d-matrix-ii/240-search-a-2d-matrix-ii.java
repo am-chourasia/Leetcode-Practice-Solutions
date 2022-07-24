@@ -16,7 +16,6 @@ class Solution {
         
         while(row >=0 && col < cols){
             int element = matrix[row][col];
-            System.out.println(row + " " + col + " " + element);
             if(element == target)
                 return true;
             if(target > element)
