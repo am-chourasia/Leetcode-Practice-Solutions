@@ -1,7 +1,7 @@
 select          name as 'Customers'
 from            Customers
-where not exists(
-    select      1
+where           id 
+not in (
+    select      customerId
     from        Orders
-    where       Customers.id = Orders.customerId
 );
