@@ -1,5 +1,7 @@
-select          name as Customers
+select          name as 'Customers'
 from            Customers
-left join       Orders
-on              Customers.id = Orders.customerId
-where           Orders.id is NULL;
+where not exists(
+    select      1
+    from        Orders
+    where       Customers.id = Orders.customerId
+);
