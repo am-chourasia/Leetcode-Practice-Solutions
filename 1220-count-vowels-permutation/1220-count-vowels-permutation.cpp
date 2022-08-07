@@ -3,7 +3,6 @@ class Solution {
     int calculatePermutation(map<char,vector<char>>& allowed, vector<vector<int>>& cache, char current, int index, int n){
         if(index == n - 1)
             return 1;
-        
         if(cache[index][current - 'a'] != -1)
             return cache[index][current - 'a'];
         
