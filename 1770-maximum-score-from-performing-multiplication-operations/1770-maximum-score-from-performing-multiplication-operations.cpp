@@ -1,15 +1,20 @@
 class Solution {
 public:
     int maximumScore(vector<int>& nums, vector<int>& multipliers) {
-        int n = nums.size();
-        int m = multipliers.size();
-        vector<int> dp;
-        dp.resize(m+1);
-        for (int op = m - 1; op >= 0; op--) {
-            for (int left = 0; left<= op; left++) {
-                dp[left] = max(multipliers[op] * nums[left] + dp[left + 1], multipliers[op] * nums[n - 1 - (op - left)] + dp[left]);
+        int len1 = nums.size();
+        int len2 = multipliers.size();
+        vector<vector<int>> dp(len2 + 1, vector<int>(len2 + 1, 0)); 
+        
+        for (int index = len2 - 1; index >= 0; index--) {
+            for (int start = index; start >= 0; start--) {
+                int end = len1 - 1 - (index - start);
+                // cout << start << " " << end << endl;
+                int left = multipliers[index] * nums[start] + dp[start + 1][index + 1];
+                int right = multipliers[index] * nums[end] + dp[start][index + 1];
+                dp[start][index] = max(left, right);
             }
         }
-        return dp[0];
+        
+        return dp[0][0];
     }
 };
