@@ -1,5 +1,5 @@
 class TimeMap {
-    map<string, map<int, string>> hashMap;
+    unordered_map<string, map<int, string>> hashMap;
 public:
     TimeMap() {
     }
